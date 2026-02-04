@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(npm create:*)",
+      "Bash(dir \"C:\\\\Users\\\\ayeni\\\\InvestmentCalculator\")",
+      "Bash(npm run build:*)",
+      "Bash(npx vite --version)",
+      "Bash(node -e:*)",
+      "Bash(npm run dev:*)"
+    ]
+  }
+}
