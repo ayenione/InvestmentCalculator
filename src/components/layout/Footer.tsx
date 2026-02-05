@@ -23,7 +23,7 @@ export function Footer() {
                   />
                 </svg>
               </div>
-              <span className="text-xl font-bold text-white">FinCalc</span>
+              <span className="text-xl font-bold text-white">TheFinCalculator</span>
             </div>
             <p className="text-gray-400 max-w-md">
               Free financial calculators to help you make smarter decisions about
@@ -70,24 +70,17 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Resources</h3>
+            <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <span className="text-gray-500 cursor-not-allowed">
-                  Financial Tips
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-500 cursor-not-allowed">
-                  Learning Center
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-500 cursor-not-allowed">
-                  FAQ
-                </span>
+                <Link
+                  to="/privacy"
+                  className="hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>
               </li>
             </ul>
           </div>
@@ -95,7 +88,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} FinCalc. All calculations are for
+            &copy; {new Date().getFullYear()} TheFinCalculator. All calculations are for
             informational purposes only.
           </p>
         </div>

@@ -27,3 +27,17 @@ dist-ssr
 build_output.txt
 dev_server.log
 git_status.txt
+deploy_output.txt
+dns_check.txt
+domain_check.txt
+domain_final.txt
+domain_output.txt
+domain_status.txt
+domain_www_output.txt
+gh_output.txt
+git_output.txt
+vercel_check.txt
+verify_output.txt
+www_dns_check.txt
+
+.vercel

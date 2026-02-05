@@ -7,6 +7,7 @@ import {
   LoanPage,
   RetirementPage,
   InflationPage,
+  PrivacyPage,
 } from './pages';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/loan" element={<LoanPage />} />
             <Route path="/retirement" element={<RetirementPage />} />
             <Route path="/inflation" element={<InflationPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
           </Routes>
         </AnimatePresence>
       </Layout>

@@ -36,7 +36,7 @@ export function Header() {
               </svg>
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-              FinCalc
+              TheFinCalculator
             </span>
           </Link>
 
