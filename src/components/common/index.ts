@@ -6,3 +6,5 @@ export * from './NumberInput';
 export * from './CurrencyInput';
 export * from './Select';
 export * from './Toggle';
+export * from './Accordion';
+export * from './LearnMoreSection';

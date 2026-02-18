@@ -4,3 +4,7 @@ export * from './LoanPage';
 export * from './RetirementPage';
 export * from './InflationPage';
 export * from './PrivacyPage';
+export * from './TermsPage';
+export * from './FaqPage';
+export * from './LearnPage';
+export * from './articles';
