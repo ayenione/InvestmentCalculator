@@ -48,10 +48,9 @@ export function ArticlePage() {
             </div>
 
             {/* Article Content */}
-            <div
-              className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-h2:text-xl prose-h2:font-semibold prose-h2:mt-8 prose-h2:mb-4 prose-p:text-gray-600 prose-p:leading-relaxed prose-li:text-gray-600 prose-strong:text-gray-900 prose-a:text-primary-600 hover:prose-a:text-primary-700 prose-table:text-sm"
-              dangerouslySetInnerHTML={{ __html: markdownToHtml(article.content) }}
-            />
+            <div className="article-content">
+              {renderMarkdown(article.content)}
+            </div>
 
             {/* Related Calculator CTA */}
             <div className="mt-12 p-6 bg-gradient-to-r from-primary-50 to-purple-50 rounded-xl border border-primary-100">
@@ -93,43 +92,174 @@ export function ArticlePage() {
   );
 }
 
-function markdownToHtml(markdown: string): string {
-  return markdown
-    .trim()
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/^\| *(.+) *\|$/gm, (match) => {
-      const cells = match
-        .split('|')
-        .filter((c) => c.trim())
-        .map((c) => c.trim());
-      return `<tr>${cells.map((c) => `<td>${c}</td>`).join('')}</tr>`;
-    })
-    .replace(/(<tr>.*<\/tr>\n?)+/g, (match) => {
-      const rows = match.trim().split('\n');
-      // Check if second row is a separator row
-      if (rows.length > 1 && /^<tr>(<td>[-:]+<\/td>)+<\/tr>$/.test(rows[1])) {
-        const header = rows[0].replace(/<td>/g, '<th>').replace(/<\/td>/g, '</th>');
-        const body = rows.slice(2).join('\n');
-        return `<table><thead>${header}</thead><tbody>${body}</tbody></table>`;
+function renderInlineFormatting(text: string): React.ReactNode[] {
+  const parts: React.ReactNode[] = [];
+  const regex = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(
+      <strong key={match.index} className="text-gray-900 font-semibold">
+        {match[1]}
+      </strong>
+    );
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : [text];
+}
+
+function renderMarkdown(markdown: string): React.ReactNode[] {
+  const lines = markdown.trim().split('\n');
+  const elements: React.ReactNode[] = [];
+  let i = 0;
+  let key = 0;
+
+  while (i < lines.length) {
+    const line = lines[i].trimEnd();
+    const trimmedLine = line.trim();
+
+    // Skip empty lines
+    if (trimmedLine === '') {
+      i++;
+      continue;
+    }
+
+    // H2
+    if (trimmedLine.startsWith('## ')) {
+      elements.push(
+        <h2 key={key++} className="text-xl font-semibold text-gray-900 mt-10 mb-4">
+          {trimmedLine.slice(3)}
+        </h2>
+      );
+      i++;
+      continue;
+    }
+
+    // H3
+    if (trimmedLine.startsWith('### ')) {
+      elements.push(
+        <h3 key={key++} className="text-lg font-semibold text-gray-900 mt-8 mb-3">
+          {trimmedLine.slice(4)}
+        </h3>
+      );
+      i++;
+      continue;
+    }
+
+    // Table
+    if (trimmedLine.startsWith('|')) {
+      const tableLines: string[] = [];
+      while (i < lines.length && lines[i].trim().startsWith('|')) {
+        tableLines.push(lines[i].trim());
+        i++;
       }
-      return `<table><tbody>${match}</tbody></table>`;
-    })
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`)
-    .replace(/\n{2,}/g, '</p><p>')
-    .replace(/^(?!<[hultop])(.+)$/gm, (match) => {
-      if (match.startsWith('<')) return match;
-      return match;
-    })
-    .replace(/(?:^|\n)(?!<[hultop])([^<\n].+?)(?=\n|$)/g, (match) => {
-      const trimmed = match.trim();
-      if (trimmed.startsWith('<') || trimmed === '') return match;
-      return `<p>${trimmed}</p>`;
-    })
-    .replace(/<p><\/p>/g, '')
-    .replace(/<p>\s*<(h[23]|ul|ol|table|li)/g, '<$1')
-    .replace(/<\/(h[23]|ul|ol|table|li)>\s*<\/p>/g, '</$1>');
+
+      const parseRow = (row: string) =>
+        row.split('|').filter((c) => c.trim()).map((c) => c.trim());
+
+      const headerCells = parseRow(tableLines[0]);
+      // Skip separator row (index 1)
+      const bodyRows = tableLines.slice(2).map(parseRow);
+
+      elements.push(
+        <div key={key++} className="my-6 overflow-x-auto">
+          <table className="w-full text-sm border-collapse border border-gray-200 rounded-lg">
+            <thead>
+              <tr className="bg-gray-50">
+                {headerCells.map((cell, ci) => (
+                  <th key={ci} className="px-4 py-3 text-left font-semibold text-gray-900 border-b border-gray-200">
+                    {renderInlineFormatting(cell)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {bodyRows.map((row, ri) => (
+                <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  {row.map((cell, ci) => (
+                    <td key={ci} className="px-4 py-3 text-gray-600 border-b border-gray-100">
+                      {renderInlineFormatting(cell)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+      continue;
+    }
+
+    // Unordered list
+    if (trimmedLine.startsWith('- ')) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].trim().startsWith('- ')) {
+        items.push(lines[i].trim().slice(2));
+        i++;
+      }
+      elements.push(
+        <ul key={key++} className="my-4 ml-6 space-y-2 list-disc">
+          {items.map((item, idx) => (
+            <li key={idx} className="text-gray-600 leading-relaxed pl-1">
+              {renderInlineFormatting(item)}
+            </li>
+          ))}
+        </ul>
+      );
+      continue;
+    }
+
+    // Ordered list
+    if (/^\d+\. /.test(trimmedLine)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\d+\. /.test(lines[i].trim())) {
+        items.push(lines[i].trim().replace(/^\d+\.\s+/, ''));
+        i++;
+      }
+      elements.push(
+        <ol key={key++} className="my-4 ml-6 space-y-2 list-decimal">
+          {items.map((item, idx) => (
+            <li key={idx} className="text-gray-600 leading-relaxed pl-1">
+              {renderInlineFormatting(item)}
+            </li>
+          ))}
+        </ol>
+      );
+      continue;
+    }
+
+    // Paragraph — collect consecutive non-empty, non-special lines
+    const paragraphLines: string[] = [];
+    while (
+      i < lines.length &&
+      lines[i].trim() !== '' &&
+      !lines[i].trim().startsWith('## ') &&
+      !lines[i].trim().startsWith('### ') &&
+      !lines[i].trim().startsWith('- ') &&
+      !lines[i].trim().startsWith('|') &&
+      !/^\d+\. /.test(lines[i].trim())
+    ) {
+      paragraphLines.push(lines[i].trim());
+      i++;
+    }
+
+    if (paragraphLines.length > 0) {
+      elements.push(
+        <p key={key++} className="text-gray-600 leading-relaxed mb-4">
+          {renderInlineFormatting(paragraphLines.join(' '))}
+        </p>
+      );
+    }
+  }
+
+  return elements;
 }
