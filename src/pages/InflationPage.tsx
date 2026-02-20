@@ -1,16 +1,27 @@
 import { Link } from 'react-router-dom';
 import { InflationCalculator } from '../components/calculators';
-import { LearnMoreSection } from '../components/common';
+import { LearnMoreSection, JsonLd } from '../components/common';
 import { usePageMeta } from '../hooks';
 
 export function InflationPage() {
   usePageMeta({
     title: 'Inflation Calculator - Purchasing Power Over Time | TheFinCalculator',
     description: 'See how inflation affects purchasing power and compare the value of money across different time periods.',
+    url: '/inflation',
   });
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Inflation Calculator',
+        url: 'https://thefincalculator.com/inflation',
+        description: 'See how inflation affects purchasing power and compare the value of money across different time periods.',
+        applicationCategory: 'FinanceApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      }} />
       <InflationCalculator />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <LearnMoreSection title="Understanding Inflation & Purchasing Power">

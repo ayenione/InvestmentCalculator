@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Card } from '../components/common';
+import { Card, JsonLd } from '../components/common';
+import { usePageMeta } from '../hooks';
 
 const calculators = [
   {
@@ -73,8 +74,26 @@ const itemVariants = {
 };
 
 export function HomePage() {
+  usePageMeta({
+    title: 'TheFinCalculator - Smart Financial Planning Tools',
+    description: 'Free financial calculators for investments, loans, mortgages, retirement planning, and inflation. Make smarter money decisions with real-time calculations and visual charts.',
+    url: '/',
+  });
+
   return (
     <div>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'TheFinCalculator',
+        url: 'https://thefincalculator.com',
+        description: 'Free financial calculators for investments, loans, mortgages, retirement planning, and inflation.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://thefincalculator.com/learn',
+          'query-input': 'required name=search_term_string',
+        },
+      }} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-purple-600 to-primary-800 text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />

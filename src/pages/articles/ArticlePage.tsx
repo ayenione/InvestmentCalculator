@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePageMeta } from '../../hooks';
+import { JsonLd } from '../../components/common';
 import { getArticleBySlug } from './articleData';
 
 export function ArticlePage() {
@@ -10,6 +11,7 @@ export function ArticlePage() {
   usePageMeta({
     title: article ? `${article.title} | TheFinCalculator` : 'Article Not Found | TheFinCalculator',
     description: article?.description || '',
+    url: article ? `/learn/${article.slug}` : '/learn',
   });
 
   if (!article) {
@@ -18,6 +20,22 @@ export function ArticlePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: article.title,
+        description: article.description,
+        url: `https://thefincalculator.com/learn/${article.slug}`,
+        publisher: {
+          '@type': 'Organization',
+          name: 'TheFinCalculator',
+          url: 'https://thefincalculator.com',
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://thefincalculator.com/learn/${article.slug}`,
+        },
+      }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

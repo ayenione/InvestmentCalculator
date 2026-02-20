@@ -29,6 +29,7 @@ export function LearnPage() {
   usePageMeta({
     title: 'Learn - Financial Education Articles | TheFinCalculator',
     description: 'Free financial education articles covering compound interest, investing, retirement planning, loans, inflation, and more.',
+    url: '/learn',
   });
 
   return (

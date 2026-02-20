@@ -8,3 +8,4 @@ export * from './Select';
 export * from './Toggle';
 export * from './Accordion';
 export * from './LearnMoreSection';
+export * from './JsonLd';

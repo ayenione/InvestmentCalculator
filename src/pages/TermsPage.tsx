@@ -5,6 +5,7 @@ export function TermsPage() {
   usePageMeta({
     title: 'Terms of Service | TheFinCalculator',
     description: 'Terms of Service for TheFinCalculator. Read our terms and conditions for using our financial calculators.',
+    url: '/terms',
   });
 
   return (

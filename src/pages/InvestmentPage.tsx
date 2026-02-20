@@ -1,16 +1,27 @@
 import { Link } from 'react-router-dom';
 import { InvestmentCalculator } from '../components/calculators';
-import { LearnMoreSection } from '../components/common';
+import { LearnMoreSection, JsonLd } from '../components/common';
 import { usePageMeta } from '../hooks';
 
 export function InvestmentPage() {
   usePageMeta({
     title: 'Investment Calculator - Compound Interest & Growth | TheFinCalculator',
     description: 'Calculate compound interest and see how your investments grow over time with our free investment calculator.',
+    url: '/investment',
   });
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Investment Calculator',
+        url: 'https://thefincalculator.com/investment',
+        description: 'Calculate compound interest and see how your investments grow over time with our free investment calculator.',
+        applicationCategory: 'FinanceApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      }} />
       <InvestmentCalculator />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <LearnMoreSection title="Understanding Investment Growth & Compound Interest">

@@ -1,16 +1,27 @@
 import { Link } from 'react-router-dom';
 import { RetirementCalculator } from '../components/calculators';
-import { LearnMoreSection } from '../components/common';
+import { LearnMoreSection, JsonLd } from '../components/common';
 import { usePageMeta } from '../hooks';
 
 export function RetirementPage() {
   usePageMeta({
     title: 'Retirement Planner - Savings & Projections | TheFinCalculator',
     description: 'Plan your retirement with savings projections, Monte Carlo simulations, and milestone tracking.',
+    url: '/retirement',
   });
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Retirement Planner',
+        url: 'https://thefincalculator.com/retirement',
+        description: 'Plan your retirement with savings projections, Monte Carlo simulations, and milestone tracking.',
+        applicationCategory: 'FinanceApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      }} />
       <RetirementCalculator />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <LearnMoreSection title="Understanding Retirement Planning">

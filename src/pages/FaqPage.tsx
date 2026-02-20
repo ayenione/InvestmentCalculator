@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePageMeta } from '../hooks';
-import { Accordion } from '../components/common';
+import { Accordion, JsonLd } from '../components/common';
 
 const generalFaq = [
   {
@@ -264,10 +264,23 @@ export function FaqPage() {
   usePageMeta({
     title: 'Frequently Asked Questions | TheFinCalculator',
     description: 'Find answers to common questions about our financial calculators, how to use them, and key financial concepts like compound interest, amortization, and inflation.',
+    url: '/faq',
   });
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'What is TheFinCalculator?', acceptedAnswer: { '@type': 'Answer', text: 'TheFinCalculator is a free online platform offering financial calculators and educational resources. Our tools help you plan investments, estimate loan payments, project retirement savings, and understand the impact of inflation on your money.' } },
+          { '@type': 'Question', name: 'Is TheFinCalculator completely free to use?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, all of our calculators and educational content are completely free to use. We support the site through non-intrusive advertising. There are no premium tiers, hidden fees, or locked features.' } },
+          { '@type': 'Question', name: 'Is my financial data safe?', acceptedAnswer: { '@type': 'Answer', text: 'All calculation data is stored locally on your device using your browser\'s local storage. Your financial information never leaves your computer and is never transmitted to our servers.' } },
+          { '@type': 'Question', name: 'What is compound interest?', acceptedAnswer: { '@type': 'Answer', text: 'Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. Unlike simple interest, compound interest causes your money to grow exponentially over time.' } },
+          { '@type': 'Question', name: 'What is the Rule of 72?', acceptedAnswer: { '@type': 'Answer', text: 'The Rule of 72 is a quick mental math shortcut to estimate how long it takes for an investment to double at a given annual return rate. Simply divide 72 by the annual interest rate.' } },
+          { '@type': 'Question', name: 'What is amortization?', acceptedAnswer: { '@type': 'Answer', text: 'Amortization is the process of spreading a loan into a series of fixed payments over time. Each payment covers both interest and principal, with early payments going mostly toward interest.' } },
+        ],
+      }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

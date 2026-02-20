@@ -1,16 +1,27 @@
 import { Link } from 'react-router-dom';
 import { LoanCalculator } from '../components/calculators';
-import { LearnMoreSection } from '../components/common';
+import { LearnMoreSection, JsonLd } from '../components/common';
 import { usePageMeta } from '../hooks';
 
 export function LoanPage() {
   usePageMeta({
     title: 'Loan Calculator - Mortgage Payments & Amortization | TheFinCalculator',
     description: 'Calculate monthly mortgage and loan payments, view amortization schedules, and compare loan options.',
+    url: '/loan',
   });
 
   return (
     <>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Loan Calculator',
+        url: 'https://thefincalculator.com/loan',
+        description: 'Calculate monthly mortgage and loan payments, view amortization schedules, and compare loan options.',
+        applicationCategory: 'FinanceApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      }} />
       <LoanCalculator />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <LearnMoreSection title="Understanding Loans & Amortization">
