@@ -70,16 +70,40 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Resources & Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Legal</h3>
+            <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
+              <li>
+                <Link
+                  to="/learn"
+                  className="hover:text-white transition-colors"
+                >
+                  Learn
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/faq"
+                  className="hover:text-white transition-colors"
+                >
+                  FAQ
+                </Link>
+              </li>
               <li>
                 <Link
                   to="/privacy"
                   className="hover:text-white transition-colors"
                 >
                   Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terms"
+                  className="hover:text-white transition-colors"
+                >
+                  Terms of Service
                 </Link>
               </li>
             </ul>

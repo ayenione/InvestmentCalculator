@@ -8,6 +8,7 @@ const navItems = [
   { path: '/loan', label: 'Loan' },
   { path: '/retirement', label: 'Retirement' },
   { path: '/inflation', label: 'Inflation' },
+  { path: '/learn', label: 'Learn' },
 ];
 
 export function Header() {

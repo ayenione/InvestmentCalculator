@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Card } from '../components/common';
+import { Card, JsonLd } from '../components/common';
+import { usePageMeta } from '../hooks';
 
 const calculators = [
   {
@@ -73,8 +74,26 @@ const itemVariants = {
 };
 
 export function HomePage() {
+  usePageMeta({
+    title: 'TheFinCalculator - Smart Financial Planning Tools',
+    description: 'Free financial calculators for investments, loans, mortgages, retirement planning, and inflation. Make smarter money decisions with real-time calculations and visual charts.',
+    url: '/',
+  });
+
   return (
     <div>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'TheFinCalculator',
+        url: 'https://thefincalculator.com',
+        description: 'Free financial calculators for investments, loans, mortgages, retirement planning, and inflation.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://thefincalculator.com/learn',
+          'query-input': 'required name=search_term_string',
+        },
+      }} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-purple-600 to-primary-800 text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
@@ -196,6 +215,86 @@ export function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Learn Section */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Learn About Personal Finance
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Build your financial knowledge with our easy-to-understand educational articles.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {[
+              {
+                title: 'How Compound Interest Works',
+                description: 'Discover why compound interest is the key to growing your wealth over time.',
+                path: '/learn/compound-interest',
+                category: 'Investing',
+              },
+              {
+                title: 'Retirement Planning Basics',
+                description: 'A step-by-step guide to planning for a comfortable retirement.',
+                path: '/learn/retirement-planning-basics',
+                category: 'Retirement',
+              },
+              {
+                title: 'The Rule of 72 Explained',
+                description: 'A simple trick to estimate how quickly your investments will double.',
+                path: '/learn/rule-of-72',
+                category: 'Investing',
+              },
+            ].map((article, index) => (
+              <motion.div
+                key={article.path}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link to={article.path}>
+                  <Card className="h-full group cursor-pointer" variant="gradient">
+                    <span className="inline-block px-2.5 py-0.5 text-xs font-medium bg-primary-100 text-primary-700 rounded-full mb-3">
+                      {article.category}
+                    </span>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                      {article.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-3">{article.description}</p>
+                    <span className="text-primary-600 text-sm font-medium inline-flex items-center">
+                      Read article
+                      <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link
+              to="/learn"
+              className="inline-flex items-center px-6 py-3 border-2 border-primary-500 text-primary-600 font-medium rounded-xl hover:bg-primary-50 transition-colors"
+            >
+              View all articles
+              <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 

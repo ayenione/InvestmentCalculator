@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
+import { usePageMeta } from '../hooks';
 
 export function PrivacyPage() {
+  usePageMeta({
+    title: 'Privacy Policy | TheFinCalculator',
+    description: 'Privacy policy for TheFinCalculator describing how we handle your data and use cookies.',
+    url: '/privacy',
+  });
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,7 +20,7 @@ export function PrivacyPage() {
 
           <div className="prose prose-gray max-w-none">
             <p className="text-gray-600 mb-6">
-              <strong>Last updated:</strong> {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              <strong>Last updated:</strong> February 16, 2026
             </p>
 
             <section className="mb-8">
