@@ -92,6 +92,14 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  to="/about"
+                  className="hover:text-white transition-colors"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/privacy"
                   className="hover:text-white transition-colors"
                 >

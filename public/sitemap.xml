@@ -76,6 +76,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://thefincalculator.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://thefincalculator.com/terms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

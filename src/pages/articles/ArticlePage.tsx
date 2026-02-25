@@ -25,6 +25,8 @@ export function ArticlePage() {
         '@type': 'Article',
         headline: article.title,
         description: article.description,
+        datePublished: article.datePublished,
+        dateModified: article.datePublished,
         url: `https://thefincalculator.com/learn/${article.slug}`,
         publisher: {
           '@type': 'Organization',

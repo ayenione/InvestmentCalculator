@@ -88,11 +88,6 @@ export function HomePage() {
         name: 'TheFinCalculator',
         url: 'https://thefincalculator.com',
         description: 'Free financial calculators for investments, loans, mortgages, retirement planning, and inflation.',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://thefincalculator.com/learn',
-          'query-input': 'required name=search_term_string',
-        },
       }} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-purple-600 to-primary-800 text-white">

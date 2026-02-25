@@ -7,4 +7,5 @@ export * from './PrivacyPage';
 export * from './TermsPage';
 export * from './FaqPage';
 export * from './LearnPage';
+export * from './AboutPage';
 export * from './articles';

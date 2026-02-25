@@ -11,6 +11,7 @@ import {
   TermsPage,
   FaqPage,
   LearnPage,
+  AboutPage,
   ArticlePage,
 } from './pages';
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/loan" element={<LoanPage />} />
             <Route path="/retirement" element={<RetirementPage />} />
             <Route path="/inflation" element={<InflationPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/faq" element={<FaqPage />} />

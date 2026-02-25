@@ -4,6 +4,7 @@ export interface Article {
   description: string;
   category: string;
   readTime: string;
+  datePublished: string;
   relatedCalculator: string;
   relatedCalculatorPath: string;
   content: string;
@@ -16,6 +17,7 @@ export const articles: Article[] = [
     description: 'Learn how compound interest works, why Einstein reportedly called it the eighth wonder of the world, and how to harness it for your financial goals.',
     category: 'Investing',
     readTime: '5 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Investment Calculator',
     relatedCalculatorPath: '/investment',
     content: `
@@ -82,6 +84,7 @@ Use our Investment Calculator to see exactly how compound interest can work for 
     description: 'Compare systematic investment plans (SIP) with lump sum investing. Understand dollar-cost averaging and which approach suits your situation.',
     category: 'Investing',
     readTime: '5 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Investment Calculator',
     relatedCalculatorPath: '/investment',
     content: `
@@ -146,6 +149,7 @@ Try our Investment Calculator to compare different contribution strategies and s
     description: 'Learn what inflation is, how it erodes purchasing power, and strategies to protect your savings from its effects.',
     category: 'Economics',
     readTime: '5 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Inflation Calculator',
     relatedCalculatorPath: '/inflation',
     content: `
@@ -205,6 +209,7 @@ This is why retirement planners recommend using inflation-adjusted (real) return
     description: 'Learn the fundamentals of retirement planning, from setting goals to choosing the right savings strategy for a comfortable retirement.',
     category: 'Retirement',
     readTime: '6 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Retirement Planner',
     relatedCalculatorPath: '/retirement',
     content: `
@@ -282,6 +287,7 @@ Use our Retirement Planner to project your retirement savings and see whether yo
     description: 'Understand how loan amortization works, why most of your early payments go to interest, and strategies to pay off your mortgage faster.',
     category: 'Loans',
     readTime: '5 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Loan Calculator',
     relatedCalculatorPath: '/loan',
     content: `
@@ -348,6 +354,7 @@ Use our Loan Calculator to generate a detailed amortization schedule for any loa
     description: 'Learn why an emergency fund is the foundation of financial security, how much to save, and the best places to keep your emergency savings.',
     category: 'Saving',
     readTime: '5 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Investment Calculator',
     relatedCalculatorPath: '/investment',
     content: `
@@ -431,6 +438,7 @@ Use our Investment Calculator to see how your emergency fund grows over time in 
     description: 'A beginner-friendly guide to investment strategies, asset allocation, diversification, and building your first investment portfolio.',
     category: 'Investing',
     readTime: '6 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Investment Calculator',
     relatedCalculatorPath: '/investment',
     content: `
@@ -514,6 +522,7 @@ Use our Investment Calculator to model different scenarios and see how your inve
     description: 'Learn the Rule of 72, a simple mental math trick to estimate how long it takes for your money to double at any given interest rate.',
     category: 'Investing',
     readTime: '4 min read',
+    datePublished: '2026-02-16',
     relatedCalculator: 'Investment Calculator',
     relatedCalculatorPath: '/investment',
     content: `
