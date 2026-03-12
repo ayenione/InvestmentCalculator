@@ -28,6 +28,11 @@ export function ArticlePage() {
         datePublished: article.datePublished,
         dateModified: article.datePublished,
         url: `https://thefincalculator.com/learn/${article.slug}`,
+        author: {
+          '@type': 'Organization',
+          name: 'TheFinCalculator',
+          url: 'https://thefincalculator.com',
+        },
         publisher: {
           '@type': 'Organization',
           name: 'TheFinCalculator',
@@ -64,7 +69,18 @@ export function ArticlePage() {
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {article.title}
               </h1>
-              <p className="text-lg text-gray-600">{article.description}</p>
+              <p className="text-lg text-gray-600 mb-5">{article.description}</p>
+              <div className="flex items-center gap-2 text-sm text-gray-500 border-t border-gray-100 pt-5">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>By <strong className="text-gray-700">TheFinCalculator Team</strong></span>
+                <span className="text-gray-300">·</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>{new Date(article.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </div>
             </div>
 
             {/* Article Content */}
