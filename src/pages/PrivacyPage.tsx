@@ -6,6 +6,7 @@ export function PrivacyPage() {
     title: 'Privacy Policy | TheFinCalculator',
     description: 'Privacy policy for TheFinCalculator describing how we handle your data and use cookies.',
     url: '/privacy',
+    noindex: true,
   });
 
   return (

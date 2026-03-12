@@ -4,6 +4,7 @@ interface PageMeta {
   title: string;
   description: string;
   url?: string;
+  noindex?: boolean;
 }
 
 const BASE_URL = 'https://thefincalculator.com';
@@ -18,7 +19,7 @@ function setMetaTag(selector: string, attribute: string, value: string) {
   }
 }
 
-export function usePageMeta({ title, description, url }: PageMeta) {
+export function usePageMeta({ title, description, url, noindex }: PageMeta) {
   useEffect(() => {
     const fullUrl = url ? `${BASE_URL}${url}` : BASE_URL;
 
@@ -26,6 +27,19 @@ export function usePageMeta({ title, description, url }: PageMeta) {
 
     // Standard meta
     setMetaTag('meta[name="description"]', 'content', description);
+
+    // Robots
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (noindex) {
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.setAttribute('content', 'noindex, follow');
+    } else if (robotsMeta) {
+      robotsMeta.setAttribute('content', 'index, follow');
+    }
 
     // Open Graph
     setMetaTag('meta[property="og:title"]', 'content', title);

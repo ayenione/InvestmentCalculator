@@ -6,6 +6,7 @@ export function TermsPage() {
     title: 'Terms of Service | TheFinCalculator',
     description: 'Terms of Service for TheFinCalculator. Read our terms and conditions for using our financial calculators.',
     url: '/terms',
+    noindex: true,
   });
 
   return (
