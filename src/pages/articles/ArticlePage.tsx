@@ -4,6 +4,59 @@ import { usePageMeta } from '../../hooks';
 import { JsonLd } from '../../components/common';
 import { getArticleBySlug } from './articleData';
 
+const categoryConfig: Record<string, { gradient: string; iconBg: string; accent: string; icon: React.ReactNode }> = {
+  Investing: {
+    gradient: 'from-primary-600 via-primary-700 to-purple-700',
+    iconBg: 'bg-white/10',
+    accent: 'border-primary-500',
+    icon: (
+      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
+  },
+  Economics: {
+    gradient: 'from-amber-500 via-orange-500 to-orange-600',
+    iconBg: 'bg-white/10',
+    accent: 'border-amber-500',
+    icon: (
+      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  Retirement: {
+    gradient: 'from-emerald-500 via-teal-500 to-teal-600',
+    iconBg: 'bg-white/10',
+    accent: 'border-emerald-500',
+    icon: (
+      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  Loans: {
+    gradient: 'from-rose-500 via-pink-500 to-pink-600',
+    iconBg: 'bg-white/10',
+    accent: 'border-rose-500',
+    icon: (
+      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+  },
+  Saving: {
+    gradient: 'from-blue-500 via-blue-600 to-cyan-600',
+    iconBg: 'bg-white/10',
+    accent: 'border-blue-500',
+    icon: (
+      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+  },
+};
+
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
@@ -18,8 +71,10 @@ export function ArticlePage() {
     return <Navigate to="/learn" replace />;
   }
 
+  const config = categoryConfig[article.category] ?? categoryConfig.Investing;
+
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50">
       <JsonLd data={{
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -43,63 +98,88 @@ export function ArticlePage() {
           '@id': `https://thefincalculator.com/learn/${article.slug}`,
         },
       }} />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Colorful Hero Banner */}
+      <div className={`bg-gradient-to-br ${config.gradient} text-white relative overflow-hidden`}>
+        {/* Decorative circles */}
+        <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white opacity-5" />
+        <div className="absolute -bottom-20 -left-10 w-56 h-56 rounded-full bg-white opacity-5" />
+        <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-white opacity-5" />
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          {/* Breadcrumb */}
+          <nav className="mb-6 text-sm text-white/70">
+            <Link to="/learn" className="hover:text-white transition-colors">
+              Learn
+            </Link>
+            <span className="mx-2 text-white/40">/</span>
+            <span className="text-white/90">{article.category}</span>
+          </nav>
+
+          <div className="flex items-start justify-between gap-8">
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 text-xs font-semibold bg-white/20 rounded-full">
+                  {article.category}
+                </span>
+                <span className="text-sm text-white/70">{article.readTime}</span>
+              </div>
+
+              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                {article.title}
+              </h1>
+              <p className="text-lg text-white/80 max-w-2xl mb-6">{article.description}</p>
+
+              <div className="flex items-center gap-3 text-sm text-white/70">
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>By <strong className="text-white font-semibold">TheFinCalculator Team</strong></span>
+                </div>
+                <span className="text-white/30">·</span>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>{new Date(article.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Large category icon */}
+            <div className={`hidden md:flex flex-shrink-0 w-24 h-24 ${config.iconBg} rounded-2xl items-center justify-center text-white/30 p-5`}>
+              {config.icon}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Article Body */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
         >
-          {/* Breadcrumb */}
-          <nav className="mb-6 text-sm">
-            <Link to="/learn" className="text-primary-600 hover:text-primary-700">
-              Learn
-            </Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-500">{article.title}</span>
-          </nav>
-
           <article className="bg-white rounded-2xl shadow-sm p-8 md:p-12">
-            {/* Article Header */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded-full">
-                  {article.category}
-                </span>
-                <span className="text-sm text-gray-500">{article.readTime}</span>
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {article.title}
-              </h1>
-              <p className="text-lg text-gray-600 mb-5">{article.description}</p>
-              <div className="flex items-center gap-2 text-sm text-gray-500 border-t border-gray-100 pt-5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span>By <strong className="text-gray-700">TheFinCalculator Team</strong></span>
-                <span className="text-gray-300">·</span>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>{new Date(article.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-              </div>
-            </div>
-
             {/* Article Content */}
             <div className="article-content">
-              {renderMarkdown(article.content)}
+              {renderMarkdown(article.content, config.accent)}
             </div>
 
             {/* Related Calculator CTA */}
-            <div className="mt-12 p-6 bg-gradient-to-r from-primary-50 to-purple-50 rounded-xl border border-primary-100">
+            <div className={`mt-12 p-6 bg-gradient-to-r ${config.gradient} rounded-xl`}>
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Try it yourself</h3>
-                  <p className="text-gray-600 text-sm">
+                  <h3 className="font-semibold text-white mb-1">Try it yourself</h3>
+                  <p className="text-white/80 text-sm">
                     Use our {article.relatedCalculator} to apply what you've learned.
                   </p>
                 </div>
                 <Link
                   to={article.relatedCalculatorPath}
-                  className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-primary-500 to-purple-600 text-white font-medium rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+                  className="inline-flex items-center px-5 py-2.5 bg-white/20 hover:bg-white/30 text-white font-medium rounded-xl transition-all duration-200 whitespace-nowrap border border-white/30"
                 >
                   Open {article.relatedCalculator}
                   <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,7 +233,7 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
   return parts.length > 0 ? parts : [text];
 }
 
-function renderMarkdown(markdown: string): React.ReactNode[] {
+function renderMarkdown(markdown: string, accentClass: string): React.ReactNode[] {
   const lines = markdown.trim().split('\n');
   const elements: React.ReactNode[] = [];
   let i = 0;
@@ -169,10 +249,10 @@ function renderMarkdown(markdown: string): React.ReactNode[] {
       continue;
     }
 
-    // H2
+    // H2 — with colored left border accent
     if (trimmedLine.startsWith('## ')) {
       elements.push(
-        <h2 key={key++} className="text-xl font-semibold text-gray-900 mt-10 mb-4">
+        <h2 key={key++} className={`text-xl font-bold text-gray-900 mt-10 mb-4 pl-4 border-l-4 ${accentClass}`}>
           {trimmedLine.slice(3)}
         </h2>
       );
@@ -191,6 +271,28 @@ function renderMarkdown(markdown: string): React.ReactNode[] {
       continue;
     }
 
+    // Blockquote — rendered as a colorful callout box
+    if (trimmedLine.startsWith('> ')) {
+      const calloutLines: string[] = [];
+      while (i < lines.length && lines[i].trim().startsWith('> ')) {
+        calloutLines.push(lines[i].trim().slice(2));
+        i++;
+      }
+      elements.push(
+        <div key={key++} className="my-6 flex gap-4 p-5 bg-primary-50 border border-primary-100 rounded-xl">
+          <div className="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p className="text-primary-900 font-medium leading-relaxed">
+            {renderInlineFormatting(calloutLines.join(' '))}
+          </p>
+        </div>
+      );
+      continue;
+    }
+
     // Table
     if (trimmedLine.startsWith('|')) {
       const tableLines: string[] = [];
@@ -203,12 +305,11 @@ function renderMarkdown(markdown: string): React.ReactNode[] {
         row.split('|').filter((c) => c.trim()).map((c) => c.trim());
 
       const headerCells = parseRow(tableLines[0]);
-      // Skip separator row (index 1)
       const bodyRows = tableLines.slice(2).map(parseRow);
 
       elements.push(
-        <div key={key++} className="my-6 overflow-x-auto">
-          <table className="w-full text-sm border-collapse border border-gray-200 rounded-lg">
+        <div key={key++} className="my-6 overflow-x-auto rounded-xl border border-gray-200">
+          <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="bg-gray-50">
                 {headerCells.map((cell, ci) => (
@@ -273,7 +374,7 @@ function renderMarkdown(markdown: string): React.ReactNode[] {
       continue;
     }
 
-    // Paragraph — collect consecutive non-empty, non-special lines
+    // Paragraph
     const paragraphLines: string[] = [];
     while (
       i < lines.length &&
@@ -281,6 +382,7 @@ function renderMarkdown(markdown: string): React.ReactNode[] {
       !lines[i].trim().startsWith('## ') &&
       !lines[i].trim().startsWith('### ') &&
       !lines[i].trim().startsWith('- ') &&
+      !lines[i].trim().startsWith('> ') &&
       !lines[i].trim().startsWith('|') &&
       !/^\d+\. /.test(lines[i].trim())
     ) {

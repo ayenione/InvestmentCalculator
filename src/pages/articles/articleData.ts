@@ -46,6 +46,8 @@ Where:
 - **n** = the number of times interest is compounded per year
 - **t** = the number of years
 
+> **The compound interest formula:** A = P(1 + r/n)^(nt) — where A is your future balance, P is your starting amount, r is the annual rate, n is compounding frequency, and t is years.
+
 ## Why Starting Early Matters
 
 The most powerful aspect of compound interest is time. Consider two investors:
@@ -54,6 +56,8 @@ The most powerful aspect of compound interest is time. Consider two investors:
 - **Investor B** starts investing $200/month at age 35 and continues until age 65 (30 years of contributions, totaling $72,000).
 
 Assuming an 8% annual return, Investor A ends up with approximately $509,000 at age 65, while Investor B ends up with approximately $298,000. Despite investing three times less money, Investor A comes out ahead because their money had more time to compound.
+
+> **Key takeaway:** Investor A contributed $24,000 total and ended up with $509,000. Investor B contributed $72,000 and ended up with $298,000. Starting 10 years earlier tripled the outcome — on one-third the contributions.
 
 ## How Compounding Frequency Affects Growth
 
@@ -449,6 +453,8 @@ Most people plan to start investing "someday." That someday is expensive. Consid
 - **Alex starts at 25** and invests until 65 — total contributions: $144,000, final balance: ~$1,006,000
 - **Jordan starts at 35** and invests until 65 — total contributions: $108,000, final balance: ~$440,000
 
+> **Alex ends up with $566,000 more than Jordan** — despite contributing only $36,000 more. That difference is 10 years of compounding, not extra money.
+
 Alex ends up with more than twice Jordan's balance despite contributing only $36,000 more. That's 10 years of compound growth doing the heavy lifting. You can verify this with our Investment Calculator — plug in your own numbers to see what waiting costs you specifically.
 
 ## Before You Invest: Three Prerequisites
@@ -508,6 +514,8 @@ Investment fees compound just like returns — but against you. Here's what a 1%
 - **0.05% fee (index fund):** Final value ~$299,000
 - **1.00% fee (active fund):** Final value ~$251,000
 - **2.00% fee (some advisors/annuities):** Final value ~$209,000
+
+> **A 2% annual fee on a $200/month investment over 30 years costs you ~$90,000 in lost growth.** Always check the expense ratio before investing — anything above 0.5% deserves scrutiny.
 
 That 2% fee cost you $90,000. Before investing anywhere, check the expense ratio. Anything above 0.5% deserves scrutiny; anything above 1% is hard to justify for a long-term portfolio.
 
