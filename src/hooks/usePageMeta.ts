@@ -37,10 +37,13 @@ export function usePageMeta({ title, description, url }: PageMeta) {
     setMetaTag('meta[name="twitter:description"]', 'content', description);
 
     // Canonical
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', fullUrl);
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
     }
+    canonical.setAttribute('href', fullUrl);
 
     return () => {
       document.title = DEFAULT_TITLE;
@@ -50,8 +53,9 @@ export function usePageMeta({ title, description, url }: PageMeta) {
       setMetaTag('meta[property="og:url"]', 'content', BASE_URL);
       setMetaTag('meta[name="twitter:title"]', 'content', DEFAULT_TITLE);
       setMetaTag('meta[name="twitter:description"]', 'content', DEFAULT_DESCRIPTION);
-      if (canonical) {
-        canonical.setAttribute('href', BASE_URL);
+      const canonicalEl = document.querySelector('link[rel="canonical"]');
+      if (canonicalEl) {
+        canonicalEl.setAttribute('href', BASE_URL);
       }
     };
   }, [title, description, url]);
