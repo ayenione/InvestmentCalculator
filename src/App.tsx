@@ -13,6 +13,7 @@ import {
   FaqPage,
   LearnPage,
   AboutPage,
+  ContactPage,
   ArticlePage,
 } from './pages';
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/retirement" element={<RetirementPage />} />
             <Route path="/inflation" element={<InflationPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/faq" element={<FaqPage />} />

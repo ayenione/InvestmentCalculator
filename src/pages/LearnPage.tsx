@@ -23,6 +23,7 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   Retirement: { bg: 'bg-emerald-100', text: 'text-emerald-700' },
   Loans: { bg: 'bg-rose-100', text: 'text-rose-700' },
   Saving: { bg: 'bg-blue-100', text: 'text-blue-700' },
+  'Personal Finance': { bg: 'bg-violet-100', text: 'text-violet-700' },
 };
 
 export function LearnPage() {

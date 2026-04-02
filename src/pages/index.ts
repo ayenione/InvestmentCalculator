@@ -8,4 +8,5 @@ export * from './TermsPage';
 export * from './FaqPage';
 export * from './LearnPage';
 export * from './AboutPage';
+export * from './ContactPage';
 export * from './articles';
